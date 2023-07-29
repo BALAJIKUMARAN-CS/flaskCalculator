@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template
+from flask import Flask,request
 
 app=Flask(__name__)
 
@@ -6,29 +6,37 @@ app=Flask(__name__)
 
 def homePage():
 
-    return "Welcome to hidden Leaf Village"
+    return 'Welcome to hidden Leaf Village'
 
 @app.route('/calc',methods=['Get'])
 
 def math_operator():
 
 #getting request from postman
-    number1 = request.json('number1')
-    number2 = request.json('number2')
-    operation = request.json('operation')
+    operation = request.json['operation']
+    number1 = request.json['number1']
+    number2 = request.json['number2']
 
     operation=operation.upper()
-    if operation == 'ADD'
-        result = number1+number2
+    
+    if operation == 'ADD':
+        result = int(number1) + int(number2)
+        return f"The  addition of {number1} and {number2} is {result}"
 
-    if operation == 'SUB'
-        result = number1-number2
-
-        if operation == 'ADD'
-        result = number1+number2
-
-    if operation == 'DIV'
-         result = number1/number2
+    elif operation == 'SUB':
+        result = int(number1) - int(number2)
+        return f"The  subtraction of {number1} and {number2} is {result}"
+    
+    elif operation == 'MUL':
+        result = int(number1) * int(number2)
+        return f"The  multiplication of {number1} and {number2} is {result}"
+    
+    elif operation == 'DIV':
+        result = int(number1) / int(number2)
+        return f"The  division of {number1} and {number2} is {result}"
+    else:
+        return "Invalid Operation"
+    
 
 print(__name__)
 
